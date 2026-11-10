@@ -981,7 +981,7 @@ class Service:
             return {'seen':target[key]}
 
     def call(self, action, payload):
-        handlers={'state':self.state, 'demo':self.demo, 'return_from_demo':self.return_from_demo,'detect':self.detect,
+        handlers={'liubai':lambda:__import__('core.liubai_bridge',fromlist=['invoke']).invoke(self,payload), 'state':self.state, 'demo':self.demo, 'return_from_demo':self.return_from_demo,'detect':self.detect,
                   'startup_reconnect':self.startup_reconnect, 'reconnect':self.reconnect,'logout':self.logout,
                   'avatar':lambda:self.avatar(payload.get('url')),
                   'sessions':self.sessions, 'messages':lambda:self.messages(payload),

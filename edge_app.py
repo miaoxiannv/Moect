@@ -78,8 +78,7 @@ class Api:
                 from core.online_protocol import web_url
                 os.startfile(web_url(payload.get('url')));result={'ok':True}
             elif action=='update_apply':
-                result=svc.online.prepare_apply()
-                window.destroy()
+                raise ValueError('此二开版本不支持安装 Moect 官方更新。')
             else:
                 result=svc.call(action,payload)
                 if action=='settings':
@@ -136,6 +135,15 @@ def main():
     if args.self_check:
         from core.selfcheck import run
         return run(args.self_check)
+    # The portable distribution carries its own independent collector. A
+    # running collector holds an exclusive port, so duplicate launches exit.
+    if getattr(sys, 'frozen', False) and not args.demo:
+        import subprocess
+        collector = Path(sys.executable).parent / 'LiubaiCollector.exe'
+        if collector.is_file():
+            subprocess.Popen([str(collector)], cwd=str(collector.parent),
+                             creationflags=subprocess.CREATE_NO_WINDOW | subprocess.DETACHED_PROCESS,
+                             close_fds=True)
     # Select monitor-native physical pixels before creating any HWND.
     ctypes.windll.user32.SetProcessDpiAwarenessContext(ctypes.c_void_p(-4))
     service=Service(BASE/'ui',args.data_dir)

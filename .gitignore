@@ -12,6 +12,8 @@ version_info.txt
 viewer-syntax.js
 .ruff_cache/
 .pytest_cache/
+/demo-profile/
+/liubai_collector/.runtime/
 .env*
 config.json
 *keys*.json
