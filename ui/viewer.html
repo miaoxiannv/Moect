@@ -16,6 +16,8 @@ body{padding-bottom:150px}html{scroll-padding-bottom:150px}.pagination-controls{
 <script>__DATE_RANGE_PICKER__</script>
 <script>__ARCHIVE_PRINT__</script>
 <script>__ARCHIVE_MEDIA__</script>
+<script src="builtin-faces.js"></script>
+<script>__INLINE_FACES__</script>
 <script>
 const manifest=__MANIFEST__;
 let page=0,pageGroup=0,reading=false,records=[],generation=0,total=0,chunkQueue=Promise.resolve(),selection=null;
@@ -40,7 +42,7 @@ function load(index){
 function localPath(value){if(typeof value!=='string')return '';let decoded;try{decoded=decodeURIComponent(value)}catch{return ''}if(decoded.includes(String.fromCharCode(92))||decoded.startsWith('/')||/^[a-z]+:/i.test(decoded))return '';return decoded.split('/').some(p=>p==='..'||p==='.')?'':value}
 function link(url){try{const u=new URL(url);return ['http:','https:','weixin:'].includes(u.protocol)?u.href:''}catch{return ''}}
 function anchor(parent,url,label,local=false){const href=local?localPath(url):link(url);if(!href)return null;const a=document.createElement('a');a.href=href;a.textContent=label;a.target='_blank';a.rel='noopener noreferrer';parent.append(a);return a}
-function textWithLinks(parent,value){const text=String(value||'');const re=/https?:\/\/[^\s<>"']+/g;let offset=0;for(const match of text.matchAll(re)){parent.append(document.createTextNode(text.slice(offset,match.index)));anchor(parent,match[0],match[0]);offset=match.index+match[0].length}parent.append(document.createTextNode(text.slice(offset)))}
+function textWithLinks(parent,value){const text=String(value||'');const re=/https?:\/\/[^\s<>"']+/g;let offset=0;for(const match of text.matchAll(re)){MoectFaces.append(parent,text.slice(offset,match.index));anchor(parent,match[0],match[0]);offset=match.index+match[0].length}MoectFaces.append(parent,text.slice(offset))}
 function renderResources(parent,message,filter=()=>true){
  const visibleImage=(message.resources||[]).some(r=>r.kind==='image'&&r.status==='available'&&localPath(r.path));
  for(const r of message.resources||[]){
@@ -67,7 +69,7 @@ function renderForward(parent,m){
  const href=localPath(f.html),card=document.createElement(href?'a':'div');card.className='forward-card';
  if(href){card.href=href;card.target='_blank';card.rel='noopener noreferrer'}
  const heading=document.createElement('strong');heading.textContent=f.title||'转发的聊天记录';card.append(heading);
- for(const p of f.preview||[]){const row=document.createElement('small');row.textContent=(p.sender?p.sender+'：':'')+p.text;card.append(row)}
+ for(const p of f.preview||[]){const row=document.createElement('small');row.append(document.createTextNode(p.sender?p.sender+'：':''));MoectFaces.append(row,p.text);card.append(row)}
  const foot=document.createElement('footer');foot.textContent='聊天记录 · '+(f.count||0)+' 条'+(href?' · 点击查看':'');card.append(foot);
  if(f.notice){const note=document.createElement('small');note.textContent=f.notice;card.append(note)}parent.append(card);return true
 }

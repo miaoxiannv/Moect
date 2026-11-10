@@ -14,6 +14,7 @@ import os
 import re
 import shutil
 import struct
+import time
 from dataclasses import dataclass, field
 from itertools import chain, islice
 
@@ -173,14 +174,110 @@ def _dat_key_candidates(buffer):
             yield value[offset:offset + 16]
 
 
-def find_dat_aes_key(sample_path: str,pids=None,progress=None,cancel=None,timeout=30,sample_paths=(),diagnostics=None):
+def _image_key_buffers(handle, regions, deadline, cancel):
+    from . import key as memory
+    for _priority, base, size in regions:
+        for offset in range(0, size, 4 * 1024 * 1024):
+            cancel()
+            if time.monotonic() >= deadline:
+                return
+            length = min(size - offset, 4 * 1024 * 1024 + 128)
+            buffer = ctypes.create_string_buffer(length)
+            count = ctypes.c_size_t()
+            memory.kernel32.ReadProcessMemory(handle, ctypes.c_void_p(base + offset), buffer,
+                                               length, ctypes.byref(count))
+            if count.value:
+                yield base + offset, buffer.raw[:count.value]
+
+
+def _account_image_key_candidates(handle, regions, wxid, deadline, cancel, diagnostics=None):
+    """Derive candidates from this account's config; acceptance still requires DAT validation.
+
+    In the 4.1 config layout the image seed precedes the wxid std::string by
+    eight bytes. Locate the actual account string and its string objects rather
+    than relying on a version-specific DLL address or scanning arbitrary seeds.
+    Derivation reference: https://github.com/jiatj/wechatapi/blob/main/wechatauto/media.py
+    """
+    from . import key as memory
+    account = wxid.encode('utf-8')
+    if not 1 <= len(account) <= 128:
+        return
+    heaps = [region for region in regions if region[0] == 0]
+    addresses = set()
+    objects = set()
+    long_account = len(account) > 15
+    now = time.monotonic()
+    # Leave time to revisit objects that precede their heap-allocated string.
+    discovery_deadline = now + max(0., deadline - now) / 2 if long_account else deadline
+
+    def candidate(address):
+        if address in objects or address < 0x10008:
+            return None
+        objects.add(address)
+        if diagnostics is not None:
+            diagnostics['account_objects'] = diagnostics.get('account_objects', 0) + 1
+        record = memory._read(handle, address - 8, 40)
+        if not record or len(record) != 40:
+            return None
+        length, capacity = struct.unpack_from('<QQ', record, 24)
+        if length != len(account) or not length <= capacity < 0x100000:
+            return None
+        seed = struct.unpack_from('<I', record)[0]
+        return hashlib.md5((str(seed) + wxid).encode('utf-8')).hexdigest()[:16].encode('ascii')
+
+    def pointer_candidates(base, buffer, until):
+        for address in addresses:
+            cancel()
+            if time.monotonic() >= until:
+                return
+            pointer = struct.pack('<Q', address)
+            offset = buffer.find(pointer)
+            while offset >= 0:
+                cancel()
+                if time.monotonic() >= until:
+                    return
+                value = candidate(base + offset)
+                if value is not None:
+                    yield value
+                offset = buffer.find(pointer, offset + 1)
+
+    for base, buffer in _image_key_buffers(handle, heaps, discovery_deadline, cancel):
+        offset = buffer.find(account + b'\0')
+        while offset >= 0:
+            cancel()
+            if time.monotonic() >= discovery_deadline:
+                break
+            address = base + offset
+            if address not in addresses:
+                addresses.add(address)
+                if diagnostics is not None:
+                    diagnostics['account_strings'] = diagnostics.get('account_strings', 0) + 1
+            if not long_account:
+                value = candidate(base + offset)
+                if value is not None:
+                    yield value
+            offset = buffer.find(account + b'\0', offset + 1)
+            if len(addresses) >= 256:
+                break
+        if long_account and addresses:
+            # Check the current chunk before another slow memory read can use
+            # the remaining budget. No full-process buffer cache is retained.
+            yield from pointer_candidates(base, buffer, discovery_deadline)
+        if len(addresses) >= 256 or time.monotonic() >= discovery_deadline:
+            break
+    if long_account and addresses:
+        for base, buffer in _image_key_buffers(handle, heaps, deadline, cancel):
+            yield from pointer_candidates(base, buffer, deadline)
+
+
+def find_dat_aes_key(sample_path: str,pids=None,progress=None,cancel=None,timeout=30,sample_paths=(),diagnostics=None,wxid=''):
     """Find account image keys using validated prefixes, without alignment assumptions.
 
     Includes 16/32/64-character strings, hex-encoded raw AES keys and binary
     protobuf key fields. Candidates must decrypt an actual image or WXGF header.
+    An optional wxid enables a bounded account-config derivation pass first.
     No credentials, process bytes or recovered keys are logged.
     """
-    import time
     from . import key as memory
     cancel=cancel or (lambda:None)
     templates = []
@@ -209,6 +306,13 @@ def find_dat_aes_key(sample_path: str,pids=None,progress=None,cancel=None,timeou
     deadline=time.monotonic()+timeout
     checked=0;seen=set()
     memory.enable_debug_privilege()
+
+    def verified(candidate):
+        plaintext = AES.new(candidate, AES.MODE_ECB).decrypt(blocks)
+        return any(image_prefix(plaintext[index * 16:(index + 1) * 16])
+                   and decrypt_dat_prefix(probe, candidate) is not None
+                   for index, probe in enumerate(templates))
+
     for pid_index,pid in enumerate(pids):
         remaining=deadline-time.monotonic()
         if remaining<=0:return None
@@ -225,29 +329,32 @@ def find_dat_aes_key(sample_path: str,pids=None,progress=None,cancel=None,timeou
                 base,size=mbi.BaseAddress,mbi.RegionSize;address=base+size
                 if address<=base:break
                 if mbi.State!=MEM_COMMIT or mbi.Protect&0x100 or (mbi.Protect&0xff) not in READABLE:continue
-                # Mutable private heaps contain the live key. DLL strings and
-                # executable/read-only pages otherwise exhaust the scan budget.
+                # Mutable private heaps contain the live config and key material.
+                # Read-only strings must not exhaust the scan budget first.
                 priority=(0 if mbi.Type==0x20000 and mbi.Protect&0xff in (0x04,0x08,0x40,0x80) else 1)
                 regions.append((priority,base,size))
-            for _priority,base,size in sorted(regions):
-                if time.monotonic()>=pid_deadline:break
-                for offset in range(0,size,4*1024*1024):
-                    cancel()
-                    if time.monotonic()>=pid_deadline:break
-                    length=min(size-offset,4*1024*1024+128)
-                    buf=ctypes.create_string_buffer(length);read=ctypes.c_size_t()
-                    memory.kernel32.ReadProcessMemory(h,ctypes.c_void_p(base+offset),buf,length,ctypes.byref(read))
-                    for cand in _dat_key_candidates(buf.raw[:read.value]):
-                        checked+=1
-                        if checked%256==0:
-                            cancel()
-                            if time.monotonic()>=pid_deadline:break
-                        if cand in seen:continue
-                        if len(seen)<250000:seen.add(cand)
-                        plaintext = AES.new(cand, AES.MODE_ECB).decrypt(blocks)
-                        for template_index, probe in enumerate(templates):
-                            if image_prefix(plaintext[template_index * 16:(template_index + 1) * 16]) and decrypt_dat_prefix(probe, cand) is not None:
-                                return cand
+            regions.sort()
+            if wxid:
+                # Configuration layouts can change. Give this optional path at
+                # most half the remaining process budget (capped at 10 seconds)
+                # so the existing string search still gets a chance to run.
+                now = time.monotonic()
+                config_deadline = now + min(10., max(0., (pid_deadline - now) / 2))
+                for cand in _account_image_key_candidates(h, regions, wxid, config_deadline, cancel, diagnostics):
+                    if verified(cand):
+                        if diagnostics is not None:diagnostics['key_source'] = 'account_config'
+                        return cand
+            for _base, buffer in _image_key_buffers(h, regions, pid_deadline, cancel):
+                for cand in _dat_key_candidates(buffer):
+                    checked+=1
+                    if checked%256==0:
+                        cancel()
+                        if time.monotonic()>=pid_deadline:break
+                    if cand in seen:continue
+                    if len(seen)<250000:seen.add(cand)
+                    if verified(cand):
+                        if diagnostics is not None:diagnostics['key_source'] = 'process_string'
+                        return cand
         finally:memory.kernel32.CloseHandle(h)
     return None
 

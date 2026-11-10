@@ -145,7 +145,7 @@ class ImageKeys:
         self.cancel=cancel;self.keys=[];self.xor=None;self.scanned=set()
         self.codec=codec or MediaCodec(cancel);self.progress=progress or (lambda _:None)
         self.scan_remaining=70.;self.rendered=None;self.reason='';self.diagnostics={};self.xor_votes={}
-        self.account=Path(data.account_dir());self.xor_search_keys=None
+        self.account=Path(data.account_dir());self.wxid=data.wxid;self.xor_search_keys=None
         identity=hashlib.sha256((str(Path(data.account_dir()).resolve())+'\0'+data.wxid).encode()).hexdigest()
         self.path=Path(getattr(data,'cache_root',None) or app_data_root())/'media-cache'/identity/'image-keys.json'
         try:
@@ -297,7 +297,7 @@ class ImageKeys:
                 self.progress('正在重新获取并严格校验微信图片密钥…')
                 started=time.monotonic()
                 paths = tuple(islice(paths, 40))
-                recovered=find_dat_aes_key(str(source),cancel=self.cancel,timeout=min(35,self.scan_remaining),sample_paths=paths)
+                recovered=find_dat_aes_key(str(source),cancel=self.cancel,timeout=min(35,self.scan_remaining),sample_paths=paths,wxid=self.wxid)
                 self.scan_remaining-=time.monotonic()-started
                 if recovered:
                     if decrypt_dat_prefix(raw, recovered) is not None:

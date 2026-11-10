@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import {LocalMediaPreview} from "@/src/LocalMediaPreview"
+import {WeChatText} from "@/src/WeChatText"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -17,7 +18,6 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  ExternalLink,
 } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
@@ -79,8 +79,8 @@ function ForwardPreview({record,depth=0}:{record:any,depth?:number}) {
     {expanded&&<div className="mt-3 space-y-3 max-h-[55vh] overflow-auto">
       {rows.slice(0,visible).map((message:any,index:number)=>message.kind==='system'||[10000,10002].includes(Number(message.type))?<div key={index} title={message.time_str} className="px-4 py-2 text-center text-xs text-muted-foreground/70 whitespace-pre-wrap [overflow-wrap:anywhere]">{message.text}</div>:<div key={index} className="border-t border-black/[0.04] dark:border-white/[0.06] pt-2">
         <div className="text-xs text-muted-foreground"><span className="font-medium text-foreground/80">{message.sender||'转发消息'}</span><span className="ml-2">{message.time_str}</span></div>
-        {message.forward&&depth<6?<ForwardPreview record={message.forward} depth={depth+1}/>:<div className="mt-1 text-sm whitespace-pre-wrap [overflow-wrap:anywhere] text-foreground/80">{message.text}</div>}
-        {(message.quote||message.extra?.reply)&&<div className="mt-1 pl-2 border-l-2 border-primary/30 text-xs text-muted-foreground">{(message.quote||message.extra.reply).sender}：{(message.quote||message.extra.reply).text}</div>}
+        {message.forward&&depth<6?<ForwardPreview record={message.forward} depth={depth+1}/>:<div className="mt-1 text-sm whitespace-pre-wrap [overflow-wrap:anywhere] text-foreground/80"><WeChatText text={message.text}/></div>}
+        {(message.quote||message.extra?.reply)&&<div className="mt-1 pl-2 border-l-2 border-primary/30 text-xs text-muted-foreground">{(message.quote||message.extra.reply).sender}：<WeChatText text={(message.quote||message.extra.reply).text}/></div>}
       </div>)}
       {visible<rows.length&&<Button size="sm" variant="ghost" onClick={()=>setVisible(n=>n+50)}>再显示 50 条</Button>}
       {record.notice&&<p className="text-xs text-muted-foreground">{record.notice}</p>}
@@ -201,32 +201,13 @@ export function MessagePreviewModal({ open, onClose, chat, onExport }: MessagePr
         nodes.push(
           <span key={`reply-${i}`} className="inline-flex items-center gap-1 text-xs text-muted-foreground/60 bg-black/[0.04] dark:bg-white/[0.06] rounded px-1.5 py-0.5 mr-1 align-middle">
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>
-            {replyText ? <span className="truncate max-w-[120px]">{replyText}</span> : '回复'}
+            {replyText ? <span className="truncate max-w-[120px]"><WeChatText text={replyText} links={false}/></span> : '回复'}
           </span>
         )
         hasContent = true
       } else if (el.textElement?.content) {
         const text = el.textElement.content as string
-        const urlRegex = /(https?:\/\/[^\s<>"']+)/g
-        const parts = text.split(urlRegex)
-        if (parts.length > 1) {
-          const textNodes: React.ReactNode[] = []
-          parts.forEach((part, pi) => {
-            if (urlRegex.test(part) || part.match(/^https?:\/\//)) {
-              textNodes.push(
-                <a key={`link-${i}-${pi}`} href={part} target="_blank" rel="noopener noreferrer" className="inline [overflow-wrap:anywhere] text-foreground decoration-dashed underline underline-offset-2 hover:text-blue-600 transition-colors">
-                  <span>{part}</span>
-                  <ExternalLink className="inline-block w-3 h-3 ml-0.5 align-text-bottom opacity-50" />
-                </a>
-              )
-            } else if (part) {
-              textNodes.push(<span key={`t-${i}-${pi}`}>{part}</span>)
-            }
-          })
-          nodes.push(<span key={`text-${i}`}>{textNodes}</span>)
-        } else {
-          nodes.push(<span key={`text-${i}`}>{text}</span>)
-        }
+        nodes.push(<span key={`text-${i}`} className="whitespace-pre-wrap [overflow-wrap:anywhere]"><WeChatText text={text}/></span>)
         hasContent = true
       } else if (el.picElement) {
         const picUrl = el.picElement.originImageUrl || el.picElement.sourcePath || el.picElement.thumbPath || ''
@@ -573,7 +554,7 @@ export function MessagePreviewModal({ open, onClose, chat, onExport }: MessagePr
                           {msg.richContent?.media&&<LocalMediaPreview hint={msg.richContent.media}/>}
                           {(!msg.richContent?.media||!/^\[(?:图片|动画表情|语音.*)\]$/.test(msg.elements[0]?.textElement?.content||''))&&formatMessageElements(msg.elements)}
                           {title&&title!==bodyText&&<span className="block mt-1 font-medium">{title}</span>}
-                          {msg.richContent?.reply&&<span className="block mt-2 pl-3 border-l-2 border-primary/30 text-xs text-muted-foreground">{msg.richContent.reply.sender}：{msg.richContent.reply.text}</span>}
+                          {msg.richContent?.reply&&<span className="block mt-2 pl-3 border-l-2 border-primary/30 text-xs text-muted-foreground whitespace-pre-wrap [overflow-wrap:anywhere]">{msg.richContent.reply.sender}：<WeChatText text={msg.richContent.reply.text}/></span>}
                           {msg.richContent?.miniprogram&&<span className="block text-xs text-muted-foreground">小程序 · {msg.richContent.source_name} · {msg.richContent.miniprogram.page_path}</span>}
                         </div>}
                       </div>

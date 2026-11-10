@@ -14,7 +14,7 @@ env['PATH'] = os.pathsep.join([str(Path(sys.executable).parent), str(Path(sys.ba
 def build(*args):
     subprocess.run([sys.executable, '-m', 'PyInstaller', '--noconfirm', '--clean', *args], cwd=root, env=env, check=True)
 build('--windowed', '--onefile', '--name', 'LiubaiCollector', '--distpath', 'build-support/collector', '--workpath', 'build-support/collector-build', '--specpath', 'build-support', '--collect-all', 'cryptography', '--collect-all', 'zstandard', 'liubai_collector/api.py')
-data = ['ui-qce;ui-qce', 'ui/viewer.html;ui', 'ui/collection.html;ui', 'ui/date-range-picker.js;ui', 'ui/archive-print.js;ui', 'ui/archive-media.js;ui', 'ui/online-config.json;ui', 'LICENSE;.', 'THIRD_PARTY_NOTICES.md;.', 'THIRD_PARTY_LICENSES;THIRD_PARTY_LICENSES', 'README-LIUBAI.md;.']
+data = ['ui-qce;ui-qce', 'ui/viewer.html;ui', 'ui/collection.html;ui', 'ui/date-range-picker.js;ui', 'ui/archive-print.js;ui', 'ui/archive-media.js;ui', 'ui/inline-faces.js;ui', 'ui/wechat-faces.json;ui', 'ui/wechat-faces;ui/wechat-faces', 'ui/online-config.json;ui', 'LICENSE;.', 'THIRD_PARTY_NOTICES.md;.', 'THIRD_PARTY_LICENSES;THIRD_PARTY_LICENSES', 'README-LIUBAI.md;.']
 options = [item for entry in data for item in ('--add-data', entry)]
 for module in ('PyQt5', 'PyQt6', 'PySide6', 'pywinauto', 'comtypes', 'tkinter', 'wx4.gui', 'wx4.cli', 'wx4.export'):
     options += ['--exclude-module', module]

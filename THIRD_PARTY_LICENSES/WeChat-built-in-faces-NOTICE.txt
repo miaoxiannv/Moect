@@ -1,0 +1,18 @@
+WeChat built-in face artwork
+
+The preset PNG artwork originates from Tencent's public WeChat emoji resources:
+https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/
+
+Artwork copyright belongs to Tencent and its respective rights holders.
+Moect does not claim ownership of this artwork. The application's GPL-3.0
+license does not change ownership of the original artwork.
+
+The fixed face-name / resource-address table was cross-checked against:
+https://github.com/chenanhan230-del/WeChatMsg-4x/blob/ea4d3f295f767996883958cf88aa5f793cac4c75/app/DataBase/output_pc.py
+(GPL-3.0; the existing adapter attribution is retained in THIRD_PARTY_NOTICES.md).
+
+The current 109-face order and Chinese names were checked against the WeChat
+panel and exported token list supplied by the user. ui/wechat-faces.json retains
+the original source URL and SHA-256 of each preset file. The image renderer and
+portable export integration are implemented in Moect. The preset library is
+used to display the corresponding built-in expressions in WeChat archives.

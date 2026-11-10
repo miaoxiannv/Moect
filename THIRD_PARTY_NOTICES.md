@@ -1,5 +1,19 @@
 # Open source attribution
 
+## WeChat built-in text faces
+
+The preset library covers the 109 built-in faces checked against the user's
+WeChat panel and exported text tokens. `ui/wechat-faces.json` records each
+source URL and SHA-256; the original PNGs come from Tencent's public
+`res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/` resources. Artwork ownership
+remains with Tencent and its respective rights holders; see
+`THIRD_PARTY_LICENSES/WeChat-built-in-faces-NOTICE.txt`.
+
+The name/address table was cross-checked against the GPL-3.0 4.x adapter's
+`app/DataBase/output_pc.py` at `ea4d3f295f767996883958cf88aa5f793cac4c75`.
+Moect's renderer uses these preset files locally and copies only the faces
+used by an HTML archive, leaving the original message text unchanged.
+
 The announcement reader uses react-markdown and remark-gfm (MIT), with notices
 for their added dependency tree in `THIRD_PARTY_LICENSES/frontend-online-dependencies.txt`.
 

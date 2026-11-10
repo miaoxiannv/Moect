@@ -15,6 +15,7 @@ from .resources import ResourceStore
 from .version import VERSION,APP_NAME
 from .export_options import export_preferences,is_system_message
 from .themes import theme_archive,archive_theme
+from .inline_faces import ArchiveFaces
 
 FORMATS = {'html', 'json', 'jsonl', 'txt', 'csv', 'md', 'xlsx'}
 
@@ -165,7 +166,8 @@ def export_session(archive, session, options, folder, viewer_assets, progress, c
                 return readable_text(message), attachments
             count = write_excel(path, records(), title, prepare, progress, cancel)
         elif fmt == 'html':
-            template = theme_archive((viewer_assets / 'viewer.html').read_text(encoding='utf-8'),meta['theme']).replace('__DATE_RANGE_PICKER__',(viewer_assets/'date-range-picker.js').read_text(encoding='utf-8')).replace('__ARCHIVE_PRINT__',(viewer_assets/'archive-print.js').read_text(encoding='utf-8')).replace('__ARCHIVE_MEDIA__',(viewer_assets/'archive-media.js').read_text(encoding='utf-8'))
+            faces = ArchiveFaces(viewer_assets, cancel)
+            template = theme_archive((viewer_assets / 'viewer.html').read_text(encoding='utf-8'),meta['theme']).replace('__DATE_RANGE_PICKER__',(viewer_assets/'date-range-picker.js').read_text(encoding='utf-8')).replace('__ARCHIVE_PRINT__',(viewer_assets/'archive-print.js').read_text(encoding='utf-8')).replace('__ARCHIVE_MEDIA__',(viewer_assets/'archive-media.js').read_text(encoding='utf-8')).replace('__INLINE_FACES__',(viewer_assets/'inline-faces.js').read_text(encoding='utf-8'))
             chunks, batch = [], []
             batch_bytes = 0
             def flush():
@@ -178,6 +180,7 @@ def export_session(archive, session, options, folder, viewer_assets, progress, c
                 batch.clear()
             for msg in records():
                 record=clean(msg)
+                faces.remember(record)
                 materialize_forward(record,out,template,meta['exported_at'],cancel)
                 record_bytes=len(json.dumps(record,ensure_ascii=False).encode('utf-8'))
                 if batch and batch_bytes+record_bytes>4*1024*1024:
@@ -186,10 +189,11 @@ def export_session(archive, session, options, folder, viewer_assets, progress, c
                 if len(batch) >= 500:flush();batch_bytes=0
                 if count % 200 == 0: progress(count)
             flush()
+            faces.write(out)
             manifest = dict(**meta, count=count, chunks=chunks,
                             resource_summary=resources.stats if resources else {})
             config = json.dumps(manifest, ensure_ascii=False).replace('<', '\\u003c')
-            (out / 'index.html').write_text(template.replace('__DATE_RANGE_PICKER__',(viewer_assets/'date-range-picker.js').read_text(encoding='utf-8')).replace('__MANIFEST__', config), encoding='utf-8')
+            (out / 'index.html').write_text(template.replace('__MANIFEST__', config), encoding='utf-8')
             path = out / 'index.html'
         else:
             path = folder / (stem + '.' + fmt)

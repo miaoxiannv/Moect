@@ -16,9 +16,11 @@ from PIL import Image
 
 from core.data import Archive
 from core.exporting import export_session
+from core.account_exporting import write_collection
 from core.resources import ResourceStore
 from tests.test_core import fixture, SESSION
 from tests.test_resources import PNG, ASSETS
+from tests.test_inline_faces import PANEL_ORDER
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -451,7 +453,8 @@ class Release125UiTests(unittest.TestCase):
         assert_fitted()
         page.keyboard.press('Escape')
         dialog.wait_for(state='hidden')
-        self.assertFalse(page.evaluate('document.documentElement.classList.contains("moect-image-open")'))
+        # Native dialog close cleanup is queued after the dialog becomes hidden.
+        page.wait_for_function('!document.documentElement.classList.contains("moect-image-open")', timeout=1000)
         self.assertEqual(errors, [])
 
     def test_official_filter_excludes_normal_friends_and_supports_batch_selection(self):
@@ -637,6 +640,141 @@ class Release125UiTests(unittest.TestCase):
         self.assertTrue(all(value is False for value in page.evaluate('window.__mediaRetries')))
         self.assertEqual(page.evaluate('window.__calls.filter(action=>action==="recover_images").length'), 1)
         self.assertEqual(errors, [])
+
+    def test_preview_renders_all_preset_faces_in_text_quotes_and_forward_records(self):
+        page, errors = self.app()
+        external = []
+        page.on('request', lambda request: external.append(request.url)
+                if request.url.startswith(('http:', 'https:')) and not request.url.startswith('http://127.0.0.1:') else None)
+        tokens = ''.join('[' + name + ']' for name in PANEL_ORDER)
+        text = tokens + '\n连续[抠鼻][抠鼻] 普通[未定义] https://example.com/[捂脸] 😂 <img src=x onerror=alert(1)>'
+        page.evaluate('''text => {
+          const invoke=window.pywebview.api.invoke;
+          window.pywebview.api.invoke=async(action,payload)=>{
+            const response=await invoke(action,payload);
+            if(action==='qce_preview'){
+              const template=response.result.messages[0];
+              response.result.messages=[
+                {...template,msgId:'faces',richContent:{reply:{sender:'引用者',text:'[捂脸]'}},elements:[{textElement:{content:text}}]},
+                {...template,msgId:'forward',richContent:{forward:{title:'合成转发表情',total:1,messages:[{sender:'转发者',text:'[抠鼻][捂脸]'}]}},elements:[]}
+              ];
+              response.result.totalCount=2;
+            }
+            return response;
+          };
+        }''', text)
+        page.evaluate("window.__wce.showPreview('friend')")
+        page.wait_for_function('() => document.querySelectorAll("img.moect-inline-face").length===112')
+        page.wait_for_function('() => Array.from(document.querySelectorAll("img.moect-inline-face")).every(image=>image.complete&&image.naturalWidth>0)')
+        self.assertTrue(set('[' + name + ']' for name in PANEL_ORDER).issubset(
+            set(page.locator('img.moect-inline-face').evaluate_all('(images)=>images.map(image=>image.alt)'))))
+        self.assertEqual(page.get_by_role('link', name='https://example.com/[捂脸]', exact=True).count(), 1)
+        self.assertIn('普通[未定义]', page.locator('body').inner_text())
+        self.assertIn('<img src=x onerror=alert(1)>', page.locator('body').inner_text())
+        before = page.url
+        page.get_by_alt_text('[抠鼻]', exact=True).first.click()
+        self.assertEqual(page.url, before)
+        page.locator('summary').filter(has_text='合成转发表情').click()
+        page.wait_for_function('() => document.querySelectorAll("img.moect-inline-face").length===114')
+        page.get_by_alt_text('[囧]', exact=True).dispatch_event('error')
+        page.get_by_alt_text('[囧]', exact=True).wait_for(state='detached')
+        self.assertIn('[囧]', page.locator('body').inner_text())
+        self.assertEqual(external, [])
+        self.assertEqual(errors, [])
+
+    def test_offline_builtin_faces_preserve_search_quotes_forward_pages_and_fallback(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            archive = Archive(fixture(root/'db', count=3))
+            try:
+                messages = list(archive.messages(SESSION))
+                messages[0]['text'] = '[抠鼻][抠鼻][捂脸]普通[未定义] https://example.com/[捂脸]'
+                messages[1].update(text='回复[囧]', quote={'text':'[捂脸]','kind':'text','sender':'引用者'})
+                child = dict(messages[0], text='[庆祝][捂脸]', server_id='900')
+                messages[2]['forward'] = {'title':'合成转发表情','messages':[child],'total':1}
+                output = root/'output';output.mkdir()
+                with patch.object(archive, 'messages', return_value=iter(messages)), patch.object(ResourceStore, 'enrich', side_effect=lambda row: row):
+                    result = export_session(archive, archive.sessions()[0], {'format':'html','includeAvatars':False}, output, ASSETS, lambda _:None, lambda:None)
+                context = self.browser.new_context()
+                try:
+                    page = context.new_page();errors=[];external=[]
+                    page.on('pageerror', lambda error: errors.append(str(error)))
+                    page.on('request', lambda request: external.append(request.url) if request.url.startswith(('http:', 'https:')) else None)
+                    page.goto(Path(result['path']).as_uri())
+                    page.wait_for_function('() => !reading && total===3')
+                    self.assertEqual(page.locator('img.moect-inline-face').count(), 7)
+                    page.wait_for_function('() => Array.from(document.querySelectorAll("img.moect-inline-face")).every(image=>image.complete&&image.naturalWidth>0)')
+                    page.get_by_alt_text('[抠鼻]', exact=True).first.click()
+                    self.assertFalse(page.get_by_role('dialog', name='图片预览', exact=True).is_visible())
+                    page.locator('#search').fill('[抠鼻]')
+                    page.get_by_role('button', name='筛选', exact=True).click()
+                    page.wait_for_function('() => !reading && total===1')
+                    self.assertEqual(page.locator('img.moect-inline-face').count(), 3)
+                    page.get_by_role('button', name='显示全部', exact=True).click()
+                    page.wait_for_function('() => !reading && total===3')
+                    href = page.locator('.forward-card').get_attribute('href')
+                    forwarded = context.new_page()
+                    forwarded.goto((Path(result['path']).parent/href).as_uri())
+                    forwarded.wait_for_function('() => !reading && total===1')
+                    self.assertEqual(forwarded.locator('img.moect-inline-face').count(), 2)
+                    forwarded.wait_for_function('() => Array.from(document.querySelectorAll("img.moect-inline-face")).every(image=>image.complete&&image.naturalWidth>0)')
+                    page.get_by_alt_text('[囧]', exact=True).dispatch_event('error')
+                    page.get_by_alt_text('[囧]', exact=True).wait_for(state='detached')
+                    self.assertIn('[囧]', page.locator('#messages').inner_text())
+                    self.assertEqual(external, [])
+                    self.assertEqual(errors, [])
+                finally:
+                    context.close()
+            finally:
+                archive.close()
+
+    def test_moments_preview_and_offline_body_comments_use_preset_faces(self):
+        page, errors = self.app()
+        page.evaluate('''() => {
+          const invoke=window.pywebview.api.invoke;
+          window.pywebview.api.invoke=async(action,payload)=>{
+            const response=await invoke(action,payload);
+            if(action==='account_assets')response.result.posts=[{id:'face-post',text:'动态[捂脸][囧]',author:'synthetic',create_time:1800000000}];
+            return response;
+          };
+          window.__wce.setTab('moments');
+        }''')
+        page.wait_for_function('() => document.querySelectorAll("img.moect-inline-face").length===2')
+        page.wait_for_function('() => Array.from(document.querySelectorAll("img.moect-inline-face")).every(image=>image.complete&&image.naturalWidth>0)')
+        self.assertEqual(errors, [])
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            data={'category':'moments','name':'合成朋友圈','owner':{'name':'合成用户'},'exported_at':'2026-11-10',
+                  'items':[{'id':'1','author':'synthetic','text':'动态[捂脸][囧] [未知] https://example.com/[微笑] <script>unsafe</script>',
+                            'comments':[{'uid':'commenter','name':'评论者','text':'回复[庆祝][抠鼻]'}]}]}
+            write_collection(root, ASSETS, data)
+            context=self.browser.new_context();self.addCleanup(context.close)
+            offline=context.new_page();external=[];archive_errors=[]
+            offline.on('pageerror', lambda error: archive_errors.append(str(error)))
+            offline.on('request', lambda request: external.append(request.url) if request.url.startswith(('http:', 'https:')) else None)
+            offline.goto((root/'index.html').as_uri())
+            offline.wait_for_function('() => document.querySelectorAll("img.moect-inline-face").length===4')
+            offline.wait_for_function('() => Array.from(document.querySelectorAll("img.moect-inline-face")).every(image=>image.complete&&image.naturalWidth>0)')
+            self.assertEqual(offline.locator('.comment-text img.moect-inline-face').count(),2)
+            self.assertIn('<script>unsafe</script>',offline.locator('#items').inner_text())
+            offline.get_by_alt_text('[囧]',exact=True).click()
+            self.assertFalse(offline.get_by_role('dialog',name='图片预览',exact=True).is_visible())
+            offline.locator('#query').fill('[捂脸]')
+            self.assertEqual(offline.locator('article.post').count(),1)
+            offline.locator('#query').fill('不存在的正文')
+            self.assertEqual(offline.locator('article.post').count(),0)
+            offline.locator('#query').fill('')
+            # Reject tampered external/traversing registry entries instead of fetching them.
+            offline.evaluate('''() => {
+              window.MoectInlineFaces['[捂脸]']='https://example.invalid/face.png';
+              window.MoectInlineFaces['[囧]']='../outside.png';
+              const target=document.createElement('div');target.id='tampered';document.body.append(target);
+              MoectFaces.append(target,'[捂脸][囧]');
+            }''')
+            self.assertEqual(offline.locator('#tampered').inner_text(),'[捂脸][囧]')
+            self.assertEqual(offline.locator('#tampered img').count(),0)
+            self.assertEqual(external,[])
+            self.assertEqual(archive_errors,[])
 
     def test_offline_emoji_uses_one_image_lightbox_and_direct_page_jump(self):
         with tempfile.TemporaryDirectory() as temporary:

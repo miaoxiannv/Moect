@@ -17,13 +17,21 @@ from .media_codec import encrypted_media_variants,media_type
 from .version import APP_NAME,VERSION
 from .sns_codec import sns_variants
 from .themes import theme_archive,archive_theme
+from .inline_faces import ArchiveFaces
 
 
-def write_collection(folder,assets,data):
+def write_collection(folder,assets,data,cancel=lambda:None):
+    faces=ArchiveFaces(assets,cancel)
+    if data.get('category')=='moments':
+        for item in data.get('items',[]):
+            faces.remember_text(item.get('text'))
+            for comment in item.get('comments',[]):
+                faces.remember_text(comment.get('text'))
+    faces.write(folder)
     data['theme']=archive_theme(data.get('theme'))
     (folder/'data.json').write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
     encoded=json.dumps(data,ensure_ascii=False).replace('<','\\u003c').replace('\u2028','\\u2028').replace('\u2029','\\u2029')
-    template=theme_archive((assets/'collection.html').read_text(encoding='utf-8'),data['theme']).replace('__DATE_RANGE_PICKER__',(assets/'date-range-picker.js').read_text(encoding='utf-8')).replace('__ARCHIVE_PRINT__',(assets/'archive-print.js').read_text(encoding='utf-8')).replace('__ARCHIVE_MEDIA__',(assets/'archive-media.js').read_text(encoding='utf-8'))
+    template=theme_archive((assets/'collection.html').read_text(encoding='utf-8'),data['theme']).replace('__DATE_RANGE_PICKER__',(assets/'date-range-picker.js').read_text(encoding='utf-8')).replace('__ARCHIVE_PRINT__',(assets/'archive-print.js').read_text(encoding='utf-8')).replace('__ARCHIVE_MEDIA__',(assets/'archive-media.js').read_text(encoding='utf-8')).replace('__INLINE_FACES__',(assets/'inline-faces.js').read_text(encoding='utf-8'))
     (folder/'index.html').write_text(template.replace('__COLLECTION__',encoded),encoding='utf-8')
 
 
@@ -68,7 +76,7 @@ def export_stickers(archive,library,payload,folder,assets,progress,cancel,status
                 data['items'].append(item)
         data['resource_summary']=dict(resources.stats)
     finally:resources.close()
-    cancel();write_collection(folder,assets,data)
+    cancel();write_collection(folder,assets,data,cancel)
     return {'name':name,'path':str(folder/'index.html'),'count':count,'format':'stickers','resource_summary':data['resource_summary']}
 
 
@@ -280,7 +288,7 @@ def export_moments(archive,library,payload,folder,assets,progress,cancel,status)
     if not catalog.available:raise ValueError('尚无可读取的朋友圈数据库。请先在微信浏览朋友圈，再刷新资源快照。')
     if not count:raise ValueError('本机尚未缓存所选范围和时间段的朋友圈。请在微信浏览相应时间线或账号主页，再刷新资源快照。')
     data['items'].sort(key=lambda p:(p['create_time'],p['id']),reverse=True)
-    cancel();write_collection(folder,assets,data)
+    cancel();write_collection(folder,assets,data,cancel)
     timestamps=[p['create_time'] for p in data['items'] if p['create_time']]
     return {'name':name,'path':str(folder/'index.html'),'count':count,'format':'moments','resource_summary':data['resource_summary'],
             'scope':selection,'start_time':min(timestamps) if timestamps else None,'end_time':max(timestamps) if timestamps else None}

@@ -1,0 +1,567 @@
+{
+  "[微笑]": {
+    "file": "f9cd19d9f48dd22eadca.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_1@2x.png",
+    "sha256": "1ec7a3442b51b14c8fa2e36bfe4b90db864e6b86d1d094672b1d7fa9113858a5"
+  },
+  "[撇嘴]": {
+    "file": "41c4c6b10edd05ea1f10.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_2@2x.png",
+    "sha256": "0279218be33b931c9e7200b7c43c19ccff3ec0621406151525cc14b8c89464a1"
+  },
+  "[色]": {
+    "file": "c0a2bc610353243161b0.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_3@2x.png",
+    "sha256": "e92bb91aa5a7d8cd87d1374495839816f89e015a6773091560e90c404c69c30c"
+  },
+  "[发呆]": {
+    "file": "224e7ff3cdd413500caf.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_4@2x.png",
+    "sha256": "8d849292356891ef376d184db64c72d423538c505fc154313f52aa7de831572a"
+  },
+  "[得意]": {
+    "file": "16cd32a2c868152bfd42.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_5@2x.png",
+    "sha256": "72060784588be3bf232b95b4724dbafea4883b4e13b904354d41430430c08161"
+  },
+  "[流泪]": {
+    "file": "555972d1cf03a584d6dd.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_6@2x.png",
+    "sha256": "f52e5f23e990860a0b7f4c4beef6ffe65f69888608ca8b77d8cbf32e7558fcfe"
+  },
+  "[害羞]": {
+    "file": "0b1bf9d0be5a189abf40.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_7@2x.png",
+    "sha256": "414541cc479e2208f656bc7ad6e458a862abb05039a11e5b93d4858fc111ecc1"
+  },
+  "[闭嘴]": {
+    "file": "d87166cfce2d129013a6.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_8@2x.png",
+    "sha256": "4b6c78a681b6159d553a635f680ca081553eeca636455fca0ccea9f8b143b16b"
+  },
+  "[睡]": {
+    "file": "c53a6d138db1f98008e5.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_9@2x.png",
+    "sha256": "75e642194eb577159cbb5d133d2ac0069854b167bc6f5f0565cdcbe849ac9b40"
+  },
+  "[大哭]": {
+    "file": "f68c08eeed1328481e48.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_10@2x.png",
+    "sha256": "2cd2fee378ecc413084e9dfaf1a95459444c0a49705ade32a94792ba2496980d"
+  },
+  "[尴尬]": {
+    "file": "12ea47cf7d6bd4a2f643.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_11@2x.png",
+    "sha256": "70cfea1c5b2a350c6b0ac7111b4dd3531624aa9bb9e04e379e4f790b334eda9d"
+  },
+  "[发怒]": {
+    "file": "540cbf33d5861abcf354.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_12@2x.png",
+    "sha256": "b88ce0218303ef74c77aceb21900dbf9ab91eea3a9c180e95316720550a31abc"
+  },
+  "[调皮]": {
+    "file": "93d71252e3f8d25956ee.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_13@2x.png",
+    "sha256": "f336354158cf9faa410bf86a5562957b2ac78a57cea040c921945507ba2f7a92"
+  },
+  "[呲牙]": {
+    "file": "4c4bfc07e1f51cad307e.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_14@2x.png",
+    "sha256": "3cd1fb7c25abda4049ea8a2a7a8d79f23f22884af8713a55d0a5a6e691aeae88"
+  },
+  "[惊讶]": {
+    "file": "88aa61b27f138a7d01dc.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_15@2x.png",
+    "sha256": "c9eb5e15fdd728c3c540909c9190d28dcdd7d1e69cef36a4f9553a2959d8719d"
+  },
+  "[难过]": {
+    "file": "ab0709032e38837b2349.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_16@2x.png",
+    "sha256": "5d872489930b3e252fd1c2882e37792945d0458545336ec3f02070ac391cd228"
+  },
+  "[囧]": {
+    "file": "384dc95931bfb2540802.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_18@2x.png",
+    "sha256": "59ee65517d65aac8cd908a8d59a15d7e24092f50c604e58b97a255611c572729"
+  },
+  "[抓狂]": {
+    "file": "f3096b797220e624fe6a.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_19@2x.png",
+    "sha256": "d1646df851a81c66ff84fc59a7062f78028c151bebe3697e76cae5702bb59edf"
+  },
+  "[吐]": {
+    "file": "87ccb872b6e5d8a6750b.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_20@2x.png",
+    "sha256": "51bb226f10a04e4a5910fad4a81a52bc448496ec7db77fac4b978109b0a6f675"
+  },
+  "[偷笑]": {
+    "file": "0d8c2bea5a3e3de0f1de.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_21@2x.png",
+    "sha256": "59941b0b03a4f31cd00a90a4b2b633791c56208aecaee8740c42061d9bd78a03"
+  },
+  "[愉快]": {
+    "file": "5f08bd6eb15389ade063.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_22@2x.png",
+    "sha256": "47582f99c943314a8b2cc44880df9b9cd29b834556394a3d87bf5b9fd9078d72"
+  },
+  "[白眼]": {
+    "file": "a27bab35861e24483880.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_23@2x.png",
+    "sha256": "ca4922346922ad0c118e0c99d99eeca014e5684a320077617d8a1fd12c1d6f1f"
+  },
+  "[傲慢]": {
+    "file": "09e20fef09f4525e38e0.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_24@2x.png",
+    "sha256": "651b4c79c4bb451be31503cd8906283a43a6e43a96fbfde09d45ec650f93173b"
+  },
+  "[困]": {
+    "file": "5f33798ef8d6c7600926.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_26@2x.png",
+    "sha256": "4556c7dbe10076ac853f049392922a25dc4f73aded1b37126b78e7af53a1bc81"
+  },
+  "[惊恐]": {
+    "file": "b55e728cc2a1c761185f.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_27@2x.png",
+    "sha256": "ed5cfeabc0fa64ac66d420c2956f375460df925c026039c24cf9523fbe09167d"
+  },
+  "[憨笑]": {
+    "file": "8872f21ead7c26e0fc6c.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_29@2x.png",
+    "sha256": "6d317a05c7a73076ee61801c2a31b3842e82128ece5706f6039885ca5109945c"
+  },
+  "[悠闲]": {
+    "file": "fa01f807452672332685.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_30@2x.png",
+    "sha256": "cef2825395dddbaf39005992142f42b3bf621b0f3a3fd782a5e0e963bdd575e0"
+  },
+  "[咒骂]": {
+    "file": "a48103e2c60183e0891f.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_32@2x.png",
+    "sha256": "a26d48fa2b0c7740a36052cc89fffb208adf962a0b37df24ef89624bba11a5a8"
+  },
+  "[疑问]": {
+    "file": "21b6406e7ec900b59039.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_33@2x.png",
+    "sha256": "aaa0926900bcf9ebc2412a622bf0ec262796d408da6fb3e78067a81d47757e85"
+  },
+  "[嘘]": {
+    "file": "b25877d113e64fef291b.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_34@2x.png",
+    "sha256": "40e8213d8337b0f47f3f65daf1d43d047fa59fffbc5011efc1fa3b5d20ad5638"
+  },
+  "[晕]": {
+    "file": "eb7e5f53517b723f5eed.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_35@2x.png",
+    "sha256": "44e3541a3ca6d80bbb6908b59f8a984d96ae42666b9156199c01a8f8c9c85476"
+  },
+  "[衰]": {
+    "file": "f056ab5cdaee6b045716.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_37@2x.png",
+    "sha256": "1a3910a698566777881b79716dfabaefcefa01de6d9d2e65c8e6cf7239ba0554"
+  },
+  "[骷髅]": {
+    "file": "7f08d0fa382b610355a5.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_38@2x.png",
+    "sha256": "3c9202dc163826faba1af70940ed6b22918ced9c7281db165af48b7bfff4c180"
+  },
+  "[敲打]": {
+    "file": "125fd67762fe1ba38122.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_39@2x.png",
+    "sha256": "b2798ca744f1e7b681d938015c1d6a870a390d12acdbc3c6e975f8ad0cc5b8e9"
+  },
+  "[再见]": {
+    "file": "a51f09e5a2180402a248.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_40@2x.png",
+    "sha256": "db23652c7ec3d06e4ac3aaf0a6a36388553d9668bce53fb401429c937981273b"
+  },
+  "[擦汗]": {
+    "file": "d0e7dcd6f7fd3a8d4ccc.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_41@2x.png",
+    "sha256": "b46fa89375e9733168c12d122d6d4d10c97aa1a5988a07e2a1d602ffa3571a9d"
+  },
+  "[抠鼻]": {
+    "file": "b082a197580f893aedb8.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_42@2x.png",
+    "sha256": "64bc80330ff881ea7e50d6342fd486ebdf97eb85a4ff6cc048acc1514df7aa24"
+  },
+  "[鼓掌]": {
+    "file": "95cccd2caaeb52fad28e.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_43@2x.png",
+    "sha256": "2a84e4c7509905d9110251f026bbec77d4c7f42d5aee953f0324dc80cdfe724e"
+  },
+  "[坏笑]": {
+    "file": "16d89cdc8f7fbc4ef9a2.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_45@2x.png",
+    "sha256": "4998b91ff5bbeeb45eca82c3bce02fc1127a599d5975e6386ad8dbd394b915c7"
+  },
+  "[右哼哼]": {
+    "file": "ec6bf218b54f874ef407.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_47@2x.png",
+    "sha256": "27d8126d2d08053ff9a01c9891c95ab7b56419f8db7a750ea7552b2e10075114"
+  },
+  "[鄙视]": {
+    "file": "529e64eac285f523e5ef.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_49@2x.png",
+    "sha256": "7e22890ddccf933871ffcad4986d6b4e4703afe2156db8fe54114b3e43603f10"
+  },
+  "[委屈]": {
+    "file": "6e2e85336f647d857e20.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_50@2x.png",
+    "sha256": "a5caf83adeaf65c85e8a22e95b65e8bc927106b7faa4ad71edf7eb1b4c2710d6"
+  },
+  "[快哭了]": {
+    "file": "9847d89290f6392819d3.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_51@2x.png",
+    "sha256": "62b1b67ccafb4033787d48dcc363eb9be8caf116d23304fba488a9941e5ab70f"
+  },
+  "[阴险]": {
+    "file": "1b6e04eb9627b5fc6b27.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_52@2x.png",
+    "sha256": "3697222b81f84b9e774f9ddf311da90a8f8e40354e1b0491ff6c526ca27a480c"
+  },
+  "[亲亲]": {
+    "file": "66eda1862822d7eeb42e.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_53@2x.png",
+    "sha256": "dfa6bbdfcc278e2349a3f3f62d18f8929f9c35d181cd9c4cea77cc8f6a8b2383"
+  },
+  "[可怜]": {
+    "file": "80c60240e0c16042d9fe.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_55@2x.png",
+    "sha256": "634845ad45fb9e76ed35790724a6461365a569a2721fdc5c17a80ea80bc7aa1d"
+  },
+  "[笑脸]": {
+    "file": "5f0f42d18c249148d178.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Happy.png",
+    "sha256": "ab25a28c2082c5da68c26304b195a7cf995e573036d02cf6900125e4f6765ce5"
+  },
+  "[生病]": {
+    "file": "58143892ae9a798ae494.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Sick.png",
+    "sha256": "cd7aadb320d5ad40179cbcd839bf4b2bfdd0d5f869a2cf4be03a41bee0b72a85"
+  },
+  "[脸红]": {
+    "file": "2d97245317fa6d6be111.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Flushed.png",
+    "sha256": "9ecb5c1cd7b4f3bfd2655ff30e3a991d1288f236e0f22dd4b94a01229144222a"
+  },
+  "[破涕为笑]": {
+    "file": "869d6065c7c7a721a558.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Lol.png",
+    "sha256": "a3d2342d88ee62786f85a347a20fc2f3ba3b9dd1bbe909b74637edb392151b27"
+  },
+  "[恐惧]": {
+    "file": "db8a5e024075946de291.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Terror.png",
+    "sha256": "7af18313ce2a0ba89dcf3017abd7108629f78802bf89f38247625d6230feb0c3"
+  },
+  "[失望]": {
+    "file": "ba9244b22a9791817683.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/LetDown.png",
+    "sha256": "87e0479bbef816ffee3a46a155dee580d9ecb1095a2ba96c0a75e38118a11005"
+  },
+  "[无语]": {
+    "file": "6e39a8e2b8be2a134fe2.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Duh.png",
+    "sha256": "6220ee7cc9a2a7d73cc06a47f6c961cfd5b92f37623221c3976f2954b4752ba0"
+  },
+  "[嘿哈]": {
+    "file": "d7e339be11bef752e742.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_04.png",
+    "sha256": "2116e692c9acbcd85975e850d7e07d783d01af1770674ee908c036d17c4a278f"
+  },
+  "[捂脸]": {
+    "file": "7c483c5b29a6301cd26a.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_05.png",
+    "sha256": "28f3a0d363c1046753c476b0f008cc00604930d1b2e84052e7bd67bcec7ea2d7"
+  },
+  "[奸笑]": {
+    "file": "527f2dc439d99681ec20.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_02.png",
+    "sha256": "9cf99423fb64f5cbca26fd4a08df6cc7a73894906a539c24f827e4217bf53af0"
+  },
+  "[机智]": {
+    "file": "6f744eb4b65f3d61df24.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_06.png",
+    "sha256": "93c3d05ac9d8a4ee7d2468148ccbefdf953d925d08d5c6dc05e081d78584bc2c"
+  },
+  "[皱眉]": {
+    "file": "4936812f0de455cfe848.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_12.png",
+    "sha256": "efe09ed7806420657b3ea6658520231d941a7504d8e5f931c96246411cbd0d8a"
+  },
+  "[耶]": {
+    "file": "66a573deb5c0a8f142de.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_11.png",
+    "sha256": "a6bc3d2b979ccd5710481ffa4a22a00cbf7e94451a5eef4d2d1503c5858b8068"
+  },
+  "[吃瓜]": {
+    "file": "5b2cef4793d482cbe5fd.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Watermelon.png",
+    "sha256": "a2a158de2dfd705781f1bb28589e94bef9fa323b9eecede99b31b96f69d6745b"
+  },
+  "[加油]": {
+    "file": "dafbc2eb30efcd5b7ea0.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Addoil.png",
+    "sha256": "77c81f5b4e18e32e9d1e65b2e58c3de7a14088d06452ece05e6e91fb39e351c6"
+  },
+  "[汗]": {
+    "file": "63fa3a920fdbcc98f75c.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Sweat.png",
+    "sha256": "be95535c47bcb589cdbef045b2b35b1565d4288c85cbd53fd2f747f677d55ab4"
+  },
+  "[天啊]": {
+    "file": "792415d06e0ca7ee5681.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Shocked.png",
+    "sha256": "a8355bf96b4f8bf9e4770967f30acb2a98d7c0fd68bb75276664a3fb452b1ec7"
+  },
+  "[Emm]": {
+    "file": "d114c06a1fc5fba4b753.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Cold.png",
+    "sha256": "787be53032b9ab4efab4dd110331c3f3a318b1ba9d56c7cafcaa4f3537f8d3d3"
+  },
+  "[社会社会]": {
+    "file": "da63674df17e0849bdd0.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Social.png",
+    "sha256": "a5f5902a286caec8d0946d41daad930d308b8800cfec030d8c906871d4849082"
+  },
+  "[旺柴]": {
+    "file": "900b40e9bd0ffa0477bc.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Yellowdog.png",
+    "sha256": "7825a175f08e465b0b6b3084bd36688cafe2bb1d19e9da29ea5a3afd1d643401"
+  },
+  "[好的]": {
+    "file": "ca5155d43f5aba3d092d.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/NoProb.png",
+    "sha256": "a9fffc6439a131e148110a9b38ae3ae9356eb132c913b7fe560f64c4fca1d2a1"
+  },
+  "[打脸]": {
+    "file": "1ff819ba33395eeae0b1.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Slap.png",
+    "sha256": "560c8d1fa28f1b87d1c821b239ed1aec1099263b31cd7465a2678a944b8f23ab"
+  },
+  "[哇]": {
+    "file": "71a23e9f2092048ea329.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Wow.png",
+    "sha256": "74cdcc27d2e8680dd4cd81be2e1900d86710e567a8ffd5c842b0430275d3a8b3"
+  },
+  "[翻白眼]": {
+    "file": "23a3415158251439060d.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Boring.png",
+    "sha256": "ecb744e2c6cc80b713c0f8338946457719b71a9911a30cd03d14829ef48bd340"
+  },
+  "[666]": {
+    "file": "5a5539fba4b8d194bc82.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/666.png",
+    "sha256": "281fb9b6c0d061dcfcd0ac817ce3317dca37a5cb8e86290f45b273f3e8d594dd"
+  },
+  "[让我看看]": {
+    "file": "0a0b705aaa3ba59ab9e5.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/LetMeSee.png",
+    "sha256": "cee96a9fd06db4d5a815ebec5a403ad1b76c0a9fb6c39107e37c188d547e3f2d"
+  },
+  "[叹气]": {
+    "file": "06f769eb98df97588bad.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Sigh.png",
+    "sha256": "712846f338d4964e96e46f55d3ffe391c5b9320998ba8bfdc5cac30ab96cf3d0"
+  },
+  "[苦涩]": {
+    "file": "ac91a04e41c0bc513a33.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Hurt.png",
+    "sha256": "4edf4f58a1beecba96a56317bdefe8259b11b7e0b6e31a0bbefd361486743bae"
+  },
+  "[裂开]": {
+    "file": "4ef325594b1a13fe4fe7.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Broken.png",
+    "sha256": "3fb9780498e9f37420762f7117ead2555ba95288b5d2c8d228f6092b4edeca49"
+  },
+  "[嘴唇]": {
+    "file": "9f27f4fdc75dce6849e3.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_66@2x.png",
+    "sha256": "59b9c0bef1e72bebac3e9d0da22ac7ca836e995b99c41e7f1a8354b13d234679"
+  },
+  "[爱心]": {
+    "file": "6629959dbac3f6829a58.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_67@2x.png",
+    "sha256": "a09c823b55205db3608d6496c563afb0d9a666b5dbfff9ffd4f8b17de80100e7"
+  },
+  "[心碎]": {
+    "file": "0f9f680bb953aa334b41.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_68@2x.png",
+    "sha256": "9a4fb37d814022ecde022f4246d1981b3e9fbaff541ccc38279b3e3a55171e98"
+  },
+  "[拥抱]": {
+    "file": "4fe2f591cadc0cc75406.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_79@2x.png",
+    "sha256": "e529a46bd9c5c90f9de07afe0a5793f45eddd3b0cde07df94581ce0d167e07a6"
+  },
+  "[强]": {
+    "file": "6491d3d93018fa9bb3d1.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_80@2x.png",
+    "sha256": "64fe98a8ccb18b1630f3420f0292c01054eca63131824436ffe17f0a4b3ff0c4"
+  },
+  "[弱]": {
+    "file": "385ceb425fae660def97.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_81@2x.png",
+    "sha256": "07ddf3a5ba22395571372e1002c2cbe6e91bc690ac66389dea5acb070fcfeda5"
+  },
+  "[握手]": {
+    "file": "d4d3652b58945f2e94cf.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_82@2x.png",
+    "sha256": "aeb8626515842621f2f9d82a43816d38682c9ac5cbee1120a3fc87aee8857a68"
+  },
+  "[胜利]": {
+    "file": "07b42e723a08ed7d33ab.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_83@2x.png",
+    "sha256": "e9ff066387bcbffd922e3231925117d76e480bfd71b853b8efb7adc809b81b5d"
+  },
+  "[抱拳]": {
+    "file": "0dc573eea0782520ffcf.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_84@2x.png",
+    "sha256": "0ae5f316c35a000a8cc7fd11f19215cbc97a09ad8a9ab7a90d4617138e676099"
+  },
+  "[勾引]": {
+    "file": "0f0f5753a29e8aeca5dc.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_85@2x.png",
+    "sha256": "a4c3a7b40fed82cbdaa6c208e45a81b8439a1631a7b3d85310934182b55c17e4"
+  },
+  "[拳头]": {
+    "file": "5ed19bb3fe3c4c90c8ec.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_86@2x.png",
+    "sha256": "2829fdbef668c1fe07dc560f68fd4271c81b50eb71ee138acbc90eaa5770940f"
+  },
+  "[OK]": {
+    "file": "bfb4b0066c375997066d.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_90@2x.png",
+    "sha256": "fc42db3d75c0aab61677e6c6497acc30ddd21b34a211d4d67c49577e138652c0"
+  },
+  "[合十]": {
+    "file": "a1b1d3c5f2154be95a92.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Worship.png",
+    "sha256": "58cd6a1dd5acf66390d6b963400e20b2a8550516b0d8c5c1f88da463090b8ca4"
+  },
+  "[啤酒]": {
+    "file": "0ef78d51b8411f24ff18.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_58@2x.png",
+    "sha256": "2d02250866877068cc8eee0eb922c7465fdc2bd9596b603d45c475a6ddd3e737"
+  },
+  "[咖啡]": {
+    "file": "02ecf85dd573a2e9cb72.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_61@2x.png",
+    "sha256": "8f40dc95a5f6e9edfe88313fe64a538b47ebb941d34cc51cf67191dd38d63b10"
+  },
+  "[蛋糕]": {
+    "file": "d7621e3bd93644ce3b36.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_69@2x.png",
+    "sha256": "f01a91ed2a43f33c1bd745d6f6df6a8ba03ee5f0f462f3feb50803925c7caccd"
+  },
+  "[玫瑰]": {
+    "file": "67e6ab515acc77f55e38.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_64@2x.png",
+    "sha256": "09e5b340f81009f245a64837e69357e872a143b27e911dfe85500678720e18f4"
+  },
+  "[凋谢]": {
+    "file": "09b0c51e7a21c87760bd.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_65@2x.png",
+    "sha256": "aa715ee6a5fa7a8acb781629fe64a6ec0e4295e301f88d56764c91ad5d29ca2f"
+  },
+  "[菜刀]": {
+    "file": "4194e2d5a8655f4493fc.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_56@2x.png",
+    "sha256": "34448d22a85e8ee6cc10e6e2ab78bde3088fc63a7350d3512b5a6e4bc9864407"
+  },
+  "[炸弹]": {
+    "file": "e043269395b8584fb857.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_71@2x.png",
+    "sha256": "3dffd8e853bfbcfc217cd69f212d29dd9bd5c31f98d58d7a7300f6a2aba72d90"
+  },
+  "[便便]": {
+    "file": "2132284e6472256a64b2.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_75@2x.png",
+    "sha256": "b0d5c50cfe6f1ace51b38cd3ea7a64a8d0a359a6a32a9876b00fbfa83a1ac9ea"
+  },
+  "[月亮]": {
+    "file": "8205641c6dcd636e3f1d.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_76@2x.png",
+    "sha256": "47389834464f6fdd3a123425025649add31967a07cba510d199e1171a271d935"
+  },
+  "[太阳]": {
+    "file": "2f5c2d78f327526cecff.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_77@2x.png",
+    "sha256": "89c3d0ab020aaf538994262572f27cf2df8bf4b54ecf0f947f549cbc782bb5b9"
+  },
+  "[庆祝]": {
+    "file": "1c5bbb8ee50b8ab80eff.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Party.png",
+    "sha256": "2d9e8f8af2faa17b00efdde4ded227a56f69c3345678740ce587b9de6e4b658d"
+  },
+  "[礼物]": {
+    "file": "34ca407408acac667872.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_78@2x.png",
+    "sha256": "37ae5ec08d2582313dc817b902fd3858b0e7ad77601c2416838c46468678a43c"
+  },
+  "[红包]": {
+    "file": "a650fece5f7b1324a757.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_09.png",
+    "sha256": "75fe87462113bb271811a57ca64f2c59c576b0b44b996629fa4516808373e717"
+  },
+  "[發]": {
+    "file": "5de20e2c26f804694b17.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_16.png",
+    "sha256": "f43fee5cb91c642ffdf9d010a5817946da86d0ec1a34a74c0f5bd7081b30d228"
+  },
+  "[福]": {
+    "file": "4509bdadde52cf73bb04.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_15.png",
+    "sha256": "58c94555fa35ca40824bff0f717204265d81ac58b7367ca1b0bc3d679c02f934"
+  },
+  "[烟花]": {
+    "file": "5694bea6b0bee24e8669.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Fireworks.png",
+    "sha256": "61568e1e591658da90b95166ad43f31089fb791de78d0100b0ba6f1ad6ede0b8"
+  },
+  "[爆竹]": {
+    "file": "0edf564c7bd7c74ab10d.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/Firecracker.png",
+    "sha256": "355316876fd335d1a0dd2be36f7ca19d86eff1baf95999a83394e6e08845042d"
+  },
+  "[猪头]": {
+    "file": "3d7473eddffb06e88d90.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_63@2x.png",
+    "sha256": "7eb8ff1dfd6bdc520430c4adfdaeb6fee9e1526de91ca32975da822ab38a230b"
+  },
+  "[跳跳]": {
+    "file": "fd268e9dbc2988089fab.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_93@2x.png",
+    "sha256": "24101efaa5989dd0b6de432481415f334eec2a1d1e0bfb73342dafdb2b7b1abe"
+  },
+  "[发抖]": {
+    "file": "084c7d1621991a87f29a.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_94@2x.png",
+    "sha256": "3eabd30645f6d6b3ca74e5872e7eebdf01200553f7fb317e621565d21d302601"
+  },
+  "[转圈]": {
+    "file": "162f7ecc261c9e75fd06.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_96@2x.png",
+    "sha256": "67669ca4ae66a7a1e81305cc8def59fcab867d4339ca5bae90117d6f5af94a95"
+  },
+  "[捂臉]": {
+    "file": "7c483c5b29a6301cd26a.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_05.png",
+    "sha256": "28f3a0d363c1046753c476b0f008cc00604930d1b2e84052e7bd67bcec7ea2d7"
+  },
+  "[摳鼻]": {
+    "file": "b082a197580f893aedb8.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_42@2x.png",
+    "sha256": "64bc80330ff881ea7e50d6342fd486ebdf97eb85a4ff6cc048acc1514df7aa24"
+  },
+  "[Facepalm]": {
+    "file": "7c483c5b29a6301cd26a.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/newemoji/2_05.png",
+    "sha256": "28f3a0d363c1046753c476b0f008cc00604930d1b2e84052e7bd67bcec7ea2d7"
+  },
+  "[NosePick]": {
+    "file": "b082a197580f893aedb8.png",
+    "url": "https://res.wx.qq.com/t/wx_fed/we-emoji/res/v1.2.8/assets/Expression/Expression_42@2x.png",
+    "sha256": "64bc80330ff881ea7e50d6342fd486ebdf97eb85a4ff6cc048acc1514df7aa24"
+  }
+}
